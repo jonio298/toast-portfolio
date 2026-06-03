@@ -293,7 +293,82 @@ function AdminPage() {
   );
 }
 
+function ServiceIcon({ type }) {
+  const icons = {
+    pos: (
+      <>
+        <rect className="icon-fill" x="6" y="8" width="24" height="18" rx="4" />
+        <rect className="icon-accent" x="11" y="13" width="14" height="6" rx="1.5" />
+        <path className="icon-stroke" d="M18 26V33" />
+        <path className="icon-stroke" d="M12 33H26" />
+        <rect className="icon-fill" x="31" y="15" width="10" height="19" rx="3" />
+        <path className="icon-stroke icon-dark" d="M34 21H38" />
+        <path className="icon-stroke icon-dark" d="M34 27H38" />
+      </>
+    ),
+    menu: (
+      <>
+        <rect className="icon-fill" x="10" y="6" width="28" height="36" rx="5" />
+        <path className="icon-accent" d="M15 13H33V19H15Z" />
+        <path className="icon-stroke icon-dark" d="M16 25H31" />
+        <path className="icon-stroke icon-dark" d="M16 31H27" />
+        <path className="icon-stroke icon-dark" d="M32 8V40" />
+      </>
+    ),
+    network: (
+      <>
+        <rect className="icon-fill" x="11" y="20" width="26" height="14" rx="4" />
+        <path className="icon-stroke" d="M14 38H38" />
+        <circle className="icon-accent" cx="18" cy="27" r="2" />
+        <circle className="icon-accent" cx="24" cy="27" r="2" />
+        <circle className="icon-accent" cx="30" cy="27" r="2" />
+        <path className="icon-stroke" d="M24 20V10" />
+        <path className="icon-stroke" d="M14 12C19 8 29 8 34 12" />
+        <path className="icon-stroke" d="M18 16C21 14 27 14 30 16" />
+      </>
+    ),
+    setup: (
+      <>
+        <path className="icon-fill" d="M9 39V18L24 7L39 18V39H9Z" />
+        <path className="icon-accent" d="M17 39V25H31V39H17Z" />
+        <path className="icon-stroke icon-dark" d="M8 19H40" />
+        <path className="icon-stroke icon-dark" d="M17 15H31" />
+      </>
+    ),
+    live: (
+      <>
+        <circle className="icon-fill" cx="24" cy="24" r="15" />
+        <circle className="icon-accent" cx="24" cy="24" r="6" />
+        <path className="icon-stroke" d="M36 12L42 6" />
+        <path className="icon-stroke" d="M39 24H45" />
+        <path className="icon-stroke" d="M36 36L42 42" />
+        <path className="icon-stroke icon-dark" d="M14 24H18" />
+      </>
+    ),
+    cleanup: (
+      <>
+        <path className="icon-fill" d="M12 35L30 17L36 23L18 41L12 35Z" />
+        <path className="icon-accent" d="M29 12L41 24L36 29L24 17L29 12Z" />
+        <path className="icon-stroke" d="M11 16H23" />
+        <path className="icon-stroke" d="M17 10V22" />
+        <path className="icon-stroke" d="M31 35H41" />
+        <path className="icon-stroke" d="M36 30V40" />
+      </>
+    ),
+  };
+
+  return (
+    <span className="service-icon" aria-hidden="true">
+      <svg viewBox="0 0 48 48">
+        {icons[type]}
+      </svg>
+    </span>
+  );
+}
+
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   if (window.location.pathname === '/consultation') {
     return <ConsultationPage />;
   }
@@ -322,6 +397,24 @@ function App() {
           <a href="#about">About</a>
           <a href="#services">Services</a>
           <a href="#contact">Contact</a>
+        </nav>
+
+        <button
+          className="menu-toggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded={isMenuOpen}
+          onClick={() => setIsMenuOpen((current) => !current)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <nav className={`mobile-menu ${isMenuOpen ? 'open' : ''}`} aria-label="Mobile navigation">
+          <a href="#about" onClick={() => setIsMenuOpen(false)}>About</a>
+          <a href="#services" onClick={() => setIsMenuOpen(false)}>Services</a>
+          <a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a>
         </nav>
       </header>
 
@@ -430,32 +523,32 @@ function App() {
 
           <div className="service-grid">
             <article className="service-card">
-              
+              <ServiceIcon type="pos" />
               <h3>POS Terminal and Printer Install</h3>
               <p>Terminal setup, printer installation, device checks, and troubleshooting when stations or printers are not communicating.</p>
             </article>
             <article className="service-card">
-              
+              <ServiceIcon type="menu" />
               <h3>Menu Help</h3>
               <p>Building, editing, and routing menus so items, prep stations, and print paths are organized for real service workflows.</p>
             </article>
             <article className="service-card">
-              
+              <ServiceIcon type="network" />
               <h3>Networking Setup</h3>
               <p>Toast router, switch, printer, and connected-device setup with practical troubleshooting across the local network.</p>
             </article>
             <article className="service-card">
-              
+              <ServiceIcon type="setup" />
               <h3>New Restaurant Setup</h3>
               <p>Hands-on support for new locations, including Toast hardware, menus, printers, routing, and launch-ready system checks.</p>
             </article>
             <article className="service-card">
-              
+              <ServiceIcon type="live" />
               <h3>GO LIVE! Support</h3>
               <p>Opening-day support for Toast launches, with on-site or remote options to help teams troubleshoot and keep service moving.</p>
             </article>
             <article className="service-card">
-              
+              <ServiceIcon type="cleanup" />
               <h3>Post-Launch Cleanup</h3>
               <p>Follow-up support after opening day to adjust menus, fix routing issues, clean up device settings, and smooth out team workflows.</p>
             </article>

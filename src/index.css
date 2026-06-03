@@ -136,6 +136,48 @@ a {
   border-color: #a65a3a;
 }
 
+.menu-toggle,
+.mobile-menu {
+  display: none;
+}
+
+.menu-toggle {
+  justify-self: end;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(245, 241, 234, 0.18);
+  border-radius: 8px;
+  background: rgba(245, 241, 234, 0.045);
+}
+
+.menu-toggle span {
+  display: block;
+  width: 19px;
+  height: 2px;
+  border-radius: 999px;
+  background: #f5f1ea;
+}
+
+.mobile-menu {
+  grid-column: 1 / -1;
+  padding: 10px;
+  border: 1px solid rgba(245, 241, 234, 0.14);
+  border-radius: 8px;
+  background: rgba(16, 17, 18, 0.92);
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 12px;
+  color: #d8d0c6;
+  font-weight: 800;
+}
+
+.mobile-menu a + a {
+  border-top: 1px solid rgba(245, 241, 234, 0.1);
+}
+
 .hero-section {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
@@ -524,6 +566,48 @@ h3 {
   background: rgba(245, 241, 234, 0.045);
 }
 
+.service-icon {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 28px;
+  place-items: center;
+  border: 1px solid rgba(215, 185, 142, 0.28);
+  border-radius: 8px;
+  color: #ffe39a;
+  background:
+    linear-gradient(145deg, rgba(215, 185, 142, 0.18), rgba(166, 90, 58, 0.1)),
+    rgba(245, 241, 234, 0.035);
+  box-shadow:
+    inset 0 0 16px rgba(215, 185, 142, 0.08),
+    0 0 18px rgba(215, 185, 142, 0.08);
+}
+
+.service-icon svg {
+  width: 38px;
+  height: 38px;
+}
+
+.icon-fill {
+  fill: #d7b98e;
+}
+
+.icon-accent {
+  fill: #ffe39a;
+}
+
+.icon-stroke {
+  fill: none;
+  stroke: #ffe39a;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3.2;
+}
+
+.icon-dark {
+  stroke: #101112;
+}
+
 .service-number {
   display: inline-block;
   margin-bottom: 54px;
@@ -732,14 +816,39 @@ h3 {
   }
 
   .topbar {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
     gap: 12px;
   }
 
   .brand,
-  .nav-links,
   .header-service-area {
-    justify-self: center;
+    justify-self: start;
+  }
+
+  .brand {
+    grid-column: 1;
+  }
+
+  .menu-toggle {
+    display: grid;
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .menu-toggle span + span {
+    margin-top: 4px;
+  }
+
+  .mobile-menu.open {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .header-service-area {
+    grid-column: 1 / -1;
   }
 
   .systems-panel {
@@ -771,14 +880,6 @@ h3 {
   .topbar {
     gap: 10px;
     padding: 14px 0 18px;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .brand small {
-    display: none;
   }
 
   .brand-mark {
@@ -864,6 +965,10 @@ h3 {
   .service-card {
     min-height: auto;
     padding: 20px;
+  }
+
+  .service-icon {
+    margin-bottom: 24px;
   }
 
   .service-number {
