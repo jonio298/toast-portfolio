@@ -452,6 +452,27 @@ h3 {
   text-transform: uppercase;
 }
 
+.sombrero-tooltip {
+  width: 64px;
+  height: 36px;
+}
+
+.sombrero-brim,
+.sombrero-crown {
+  fill: #ffe39a;
+  stroke: rgba(16, 17, 18, 0.8);
+  stroke-linejoin: round;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 10px rgba(255, 213, 96, 0.42));
+}
+
+.sombrero-band {
+  fill: none;
+  stroke: #a65a3a;
+  stroke-linecap: round;
+  stroke-width: 3;
+}
+
 .inactive-state-group:hover .state-tooltip {
   opacity: 1;
 }
@@ -699,28 +720,8 @@ h3 {
 }
 
 .service-icon svg {
-  width: 38px;
-  height: 38px;
-}
-
-.icon-fill {
-  fill: #d7b98e;
-}
-
-.icon-accent {
-  fill: #ffe39a;
-}
-
-.icon-stroke {
-  fill: none;
-  stroke: #ffe39a;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 3.2;
-}
-
-.icon-dark {
-  stroke: #101112;
+  color: currentColor;
+  filter: drop-shadow(0 0 9px rgba(255, 227, 154, 0.22));
 }
 
 .service-number {
