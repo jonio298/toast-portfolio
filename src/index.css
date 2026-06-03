@@ -136,6 +136,37 @@ a {
   border-color: #a65a3a;
 }
 
+.language-toggle,
+.mobile-language-toggle {
+  border: 1px solid rgba(215, 185, 142, 0.34);
+  border-radius: 8px;
+  color: #ffe39a;
+  background: rgba(215, 185, 142, 0.08);
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 900;
+  cursor: pointer;
+  
+}
+
+.language-toggle {
+  justify-self: left;
+  padding: 9px 10px;
+}
+
+.language-toggle:hover,
+.mobile-language-toggle:hover {
+  border-color: rgba(255, 227, 154, 0.64);
+  background: rgba(215, 185, 142, 0.14);
+}
+
+.mobile-language-toggle {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  text-align: left;
+}
+
 .menu-toggle,
 .mobile-menu {
   display: none;
@@ -765,6 +796,20 @@ h3 {
   margin-top: 0;
 }
 
+.site-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 0 28px;
+  color: #8f877d;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.site-footer span {
+  padding: 9px 0 0;
+  border-top: 1px solid rgba(215, 185, 142, 0.28);
+}
+
 .consultation-shell {
   min-height: 100vh;
 }
@@ -951,6 +996,10 @@ h3 {
     grid-row: 1;
   }
 
+  .language-toggle {
+    display: none;
+  }
+
   .menu-toggle span + span {
     margin-top: 4px;
   }
@@ -1094,6 +1143,12 @@ h3 {
   .contact-section {
     gap: 24px;
     padding-bottom: 52px;
+  }
+
+  .site-footer {
+    justify-content: center;
+    padding-bottom: 24px;
+    text-align: center;
   }
 
   .button {

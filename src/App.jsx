@@ -279,8 +279,104 @@ function ServiceIcon({ Icon }) {
   );
 }
 
+const pageCopy = {
+  en: {
+    languageButton: 'ESP',
+    brandRole: 'Traveling Field Tech',
+    servingLabel: 'Currently Serving:',
+    servingArea: 'Santa Fe + Albuquerque',
+    nav: ['About', 'Services', 'Contact'],
+    eyebrow: 'Toast POS systems / menu help / printers / network installs',
+    heroTitle: 'Restaurant tech that works when service starts.',
+    heroText:
+      'Toast setup, menu routing, printers, networking, and go-live support for restaurants that need reliable systems on day one.',
+    contactCta: 'Contact me',
+    servicesCta: 'View services',
+    liveReadout: 'FIELD READOUT',
+    ready: 'Ready',
+    serviceArea: 'Service area',
+    maybeSoon: 'maybe soon',
+    metrics: [
+      ['Terminals', 'POS + printers online'],
+      ['Menus', 'Items routed correctly'],
+      ['Network', 'Router + switch checked'],
+    ],
+    aboutEyebrow: 'About me',
+    aboutTitle: 'I work where software meets messy real-world hardware.',
+    aboutText: [
+      'I have installed Toast systems and built menus for restaurants across the country, helping teams get terminals, printers, routing, and menu workflows ready for service.',
+      'I know restaurants inside and out. With years of experience in both the kitchen and front of house, I understand how a restaurant actually operates, how fast problems need to be solved, and how important clear communication is when the team is trying to stay focused on guests.',
+    ],
+    servicesEyebrow: 'Services',
+    servicesTitle: 'Technical support that stays grounded in outcomes.',
+    services: [
+      ['POS Terminal and Printer Install', 'Terminal setup, printer installation, device checks, and troubleshooting when stations or printers are not communicating.'],
+      ['Menu Help', 'Building, editing, and routing menus so items, prep stations, and print paths are organized for real service workflows.'],
+      ['Networking Setup', 'Toast router, switch, printer, and connected-device setup with practical troubleshooting across the local network.'],
+      ['New Restaurant Setup', 'Hands-on support for new locations, including Toast hardware, menus, printers, routing, and launch-ready system checks.'],
+      ['GO LIVE! Support', 'Opening-day support for Toast launches, with on-site or remote options to help teams troubleshoot and keep service moving.'],
+      ['Post-Launch Cleanup', 'Follow-up support after opening day to adjust menus, fix routing issues, clean up device settings, and smooth out team workflows.'],
+    ],
+    contactEyebrow: 'Contact',
+    contactTitle: 'Need a system installed, cleaned up, or brought back online?',
+    contactText: 'I am available for installation, troubleshooting, technical setup work, and field support projects.',
+    consultation: 'Schedule free consultation!',
+    email: 'Email me',
+    call: 'Call me',
+    footer: 'Designed in React by Jonathan Shelley',
+  },
+  es: {
+    languageButton: 'ENG',
+    brandRole: 'Tecnico de Campo Movil',
+    servingLabel: 'Actualmente sirviendo:',
+    servingArea: 'Santa Fe + Albuquerque',
+    nav: ['Sobre mi', 'Servicios', 'Contacto'],
+    eyebrow: 'Toast POS / menus / impresoras / redes',
+    heroTitle: 'Tecnologia de restaurante lista cuando empieza el servicio.',
+    heroText:
+      'Instalacion de Toast, rutas de menu, impresoras, redes y soporte de apertura para restaurantes que necesitan sistemas confiables desde el primer dia.',
+    contactCta: 'Contactame',
+    servicesCta: 'Ver servicios',
+    liveReadout: 'LECTURA DE CAMPO',
+    ready: 'Listo',
+    serviceArea: 'Area de servicio',
+    maybeSoon: 'tal vez pronto',
+    metrics: [
+      ['Terminales', 'POS + impresoras en linea'],
+      ['Menus', 'Articulos bien enrutados'],
+      ['Red', 'Router + switch revisados'],
+    ],
+    aboutEyebrow: 'Sobre mi',
+    aboutTitle: 'Trabajo donde el software se encuentra con hardware del mundo real.',
+    aboutText: [
+      'He instalado sistemas Toast y construido menus para restaurantes en todo el pais, ayudando a equipos a dejar terminales, impresoras, rutas y flujos de menu listos para el servicio.',
+      'Conozco los restaurantes por dentro y por fuera. Con anos de experiencia en cocina y frente de casa, entiendo como opera un restaurante, que tan rapido se deben resolver los problemas y la importancia de comunicarse claro cuando el equipo esta enfocado en los clientes.',
+    ],
+    servicesEyebrow: 'Servicios',
+    servicesTitle: 'Soporte tecnico enfocado en resultados reales.',
+    services: [
+      ['Instalacion de terminales POS e impresoras', 'Configuracion de terminales, instalacion de impresoras, revision de dispositivos y solucion de problemas cuando estaciones o impresoras no se comunican.'],
+      ['Ayuda con menus', 'Creacion, edicion y enrutamiento de menus para que articulos, estaciones de preparacion y rutas de impresion funcionen con el flujo real del servicio.'],
+      ['Configuracion de red', 'Configuracion de router Toast, switch, impresoras y dispositivos conectados, con solucion practica de problemas en la red local.'],
+      ['Apertura de nuevo restaurante', 'Soporte en sitio para nuevas ubicaciones, incluyendo hardware Toast, menus, impresoras, rutas y revision del sistema antes de abrir.'],
+      ['Soporte GO LIVE!', 'Soporte el dia de apertura para lanzamientos Toast, con opciones en sitio o remoto para resolver problemas y mantener el servicio avanzando.'],
+      ['Limpieza despues del lanzamiento', 'Soporte despues de abrir para ajustar menus, arreglar rutas, limpiar configuraciones de dispositivos y mejorar flujos del equipo.'],
+    ],
+    contactEyebrow: 'Contacto',
+    contactTitle: 'Necesitas instalar, limpiar o volver a poner en linea un sistema?',
+    contactText: 'Estoy disponible para instalacion, solucion de problemas, configuracion tecnica y proyectos de soporte en campo.',
+    consultation: 'Programa una consulta gratis!',
+    email: 'Enviame un email',
+    call: 'Llamame',
+    footer: 'Disenado en React por Jonathan Shelley',
+  },
+};
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [language, setLanguage] = useState('en');
+  const copy = pageCopy[language];
+  const serviceIcons = [MonitorCog, ClipboardCheck, Network, Store, RadioTower, CookingPot];
 
   if (window.location.pathname === '/consultation') {
     return <ConsultationPage />;
@@ -297,20 +393,28 @@ function App() {
           <img className="brand-mark" src="/jonathan-shelley-logo.svg" alt="" />
           <span>
             <strong>Jonathan Shelley</strong>
-            <small>Traveling Field Tech</small>
+            <small>{copy.brandRole}</small>
           </span>
         </a>
 
         <p className="header-service-area">
-          <span>Currently Serving:</span>
-          <strong>Santa Fe + Albuquerque</strong>
+          <span>{copy.servingLabel}</span>
+          <strong>{copy.servingArea}</strong>
         </p>
 
         <nav className="nav-links" aria-label="Primary navigation">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#contact">Contact</a>
+          <a href="#about">{copy.nav[0]}</a>
+          <a href="#services">{copy.nav[1]}</a>
+          <a href="#contact">{copy.nav[2]}</a>
         </nav>
+
+        <button
+          className="language-toggle"
+          type="button"
+          onClick={() => setLanguage((current) => (current === 'en' ? 'es' : 'en'))}
+        >
+          {copy.languageButton}
+        </button>
 
         <button
           className="menu-toggle"
@@ -325,41 +429,50 @@ function App() {
         </button>
 
         <nav className={`mobile-menu ${isMenuOpen ? 'open' : ''}`} aria-label="Mobile navigation">
-          <a href="#about" onClick={() => setIsMenuOpen(false)}>About</a>
-          <a href="#services" onClick={() => setIsMenuOpen(false)}>Services</a>
-          <a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a>
+          <a href="#about" onClick={() => setIsMenuOpen(false)}>{copy.nav[0]}</a>
+          <a href="#services" onClick={() => setIsMenuOpen(false)}>{copy.nav[1]}</a>
+          <a href="#contact" onClick={() => setIsMenuOpen(false)}>{copy.nav[2]}</a>
+          <button
+            className="mobile-language-toggle"
+            type="button"
+            onClick={() => {
+              setLanguage((current) => (current === 'en' ? 'es' : 'en'));
+              setIsMenuOpen(false);
+            }}
+          >
+            {copy.languageButton}
+          </button>
         </nav>
       </header>
 
       <main id="top">
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <p className="eyebrow">Toast POS systems / menu help / printers / network installs</p>
-            <h2 id="hero-title">Restaurant tech that works when service starts.</h2>
+            <p className="eyebrow">{copy.eyebrow}</p>
+            <h2 id="hero-title">{copy.heroTitle}</h2>
             <p className="hero-lede">
-              Toast setup, menu routing, printers, networking, and go-live support for
-              restaurants that need reliable systems on day one.
+              {copy.heroText}
             </p>
 
             <div className="hero-actions" aria-label="Main actions">
-              <a className="button primary" href="#contact">Contact me</a>
-              <a className="button secondary" href="#services">View services</a>
+              <a className="button primary" href="#contact">{copy.contactCta}</a>
+              <a className="button secondary" href="#services">{copy.servicesCta}</a>
             </div>
           </div>
 
           <div className="systems-panel" aria-label="Field systems overview">
             <div className="panel-topline">
-              <span><strong className="live-word">LIVE</strong> FIELD READOUT</span>
+              <span><strong className="live-word">LIVE</strong> {copy.liveReadout}</span>
               <span className="status-pill">
                 <span className="status-led" aria-hidden="true" />
-                Ready
+                {copy.ready}
               </span>
             </div>
 
             <div className="system-map">
               <div className="map-label">
-                <span>Service area</span>
-                <strong>Santa Fe + Albuquerque</strong>
+                <span>{copy.serviceArea}</span>
+                <strong>{copy.servingArea}</strong>
               </div>
 
               <svg className="us-map" viewBox="0 0 640 390" role="img" aria-label="Regional Southwest map with a radar marker near Santa Fe, New Mexico">
@@ -368,28 +481,28 @@ function App() {
                     <path className="state-shape state-muted state-az" d="M138 113 L282 113 L282 292 L222 292 L205 318 L150 302 L130 220 Z" />
                     <g className="state-tooltip" transform="translate(158 198)">
                       <rect width="82" height="24" rx="7" />
-                      <text x="41" y="16">maybe soon</text>
+                      <text x="41" y="16">{copy.maybeSoon}</text>
                     </g>
                   </g>
                   <g className="inactive-state-group">
                     <path className="state-shape state-muted state-co" d="M282 63 L416 63 L416 113 L282 113 Z" />
                     <g className="state-tooltip" transform="translate(308 78)">
                       <rect width="82" height="24" rx="7" />
-                      <text x="41" y="16">maybe soon</text>
+                      <text x="41" y="16">{copy.maybeSoon}</text>
                     </g>
                   </g>
                   <g className="inactive-state-group">
                     <path className="state-shape state-muted state-ok" d="M416 113 L520 113 L520 153 L416 153 Z" />
                     <g className="state-tooltip" transform="translate(428 126)">
                       <rect width="82" height="24" rx="7" />
-                      <text x="41" y="16">maybe soon</text>
+                      <text x="41" y="16">{copy.maybeSoon}</text>
                     </g>
                   </g>
                   <g className="inactive-state-group">
                     <path className="state-shape state-muted state-tx" d="M416 153 L528 153 L558 224 L520 326 L458 308 L416 288 Z" />
                     <g className="state-tooltip" transform="translate(452 220)">
                       <rect width="82" height="24" rx="7" />
-                      <text x="41" y="16">maybe soon</text>
+                      <text x="41" y="16">{copy.maybeSoon}</text>
                     </g>
                   </g>
                   <g className="inactive-state-group">
@@ -400,9 +513,9 @@ function App() {
                       <path className="sombrero-band" d="M20 21H44" />
                     </g>
                   </g>
-                  <path className="state-shape state-new-mexico" d="M282 113 L416 113 L416 296 L352 296 L352 282 L282 282 Z" />
+                  <path className="state-shape state-new-mexico" d="M282 113 L416 113 L416 282 L352 282 L352 296 L282 296 Z" />
 
-                  <path className="state-line" d="M282 113 L416 113 M282 282 L352 282 L352 296 M416 153 L520 153 M416 288 L458 308 M244 296 L416 296" />
+                  <path className="state-line" d="M282 113 L416 113 M352 282 L416 282 M352 282 L352 296 M416 153 L520 153 M416 288 L458 308 M244 296 L416 296" />
 
                   <text className="state-label" x="190" y="214">AZ</text>
                   <text className="state-label" x="340" y="96">CO</text>
@@ -423,101 +536,55 @@ function App() {
             </div>
 
             <div className="metrics-grid">
-              <div>
-                <span className="metric-leds" aria-hidden="true">
-                  <span className="metric-led green" />
-                  <span className="metric-led red" />
-                </span>
-                <span>Terminals</span>
-                <strong>POS + printers online</strong>
-              </div>
-              <div>
-                <span className="metric-leds" aria-hidden="true">
-                  <span className="metric-led green" />
-                  <span className="metric-led red" />
-                </span>
-                <span>Menus</span>
-                <strong>Items routed correctly</strong>
-              </div>
-              <div>
-                <span className="metric-leds" aria-hidden="true">
-                  <span className="metric-led green" />
-                  <span className="metric-led red" />
-                </span>
-                <span>Network</span>
-                <strong>Router + switch checked</strong>
-              </div>
+              {copy.metrics.map(([label, value]) => (
+                <div key={label}>
+                  <span className="metric-leds" aria-hidden="true">
+                    <span className="metric-led green" />
+                    <span className="metric-led red" />
+                  </span>
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         <section className="about-section page-band" id="about" aria-labelledby="about-title">
           <div className="section-heading">
-            <p className="eyebrow">About me</p>
-            <h2 id="about-title">I work where software meets messy real-world hardware.</h2>
+            <p className="eyebrow">{copy.aboutEyebrow}</p>
+            <h2 id="about-title">{copy.aboutTitle}</h2>
           </div>
           <div className="about-copy">
-            <p>
-              I have installed Toast systems and built menus for restaurants across the
-              country, helping teams get terminals, printers, routing, and menu workflows
-              ready for service.
-            </p>
-            <p>
-              I know restaurants inside and out. With years of experience in both the
-              kitchen and front of house, I understand how a restaurant actually operates,
-              how fast problems need to be solved, and how important clear communication is
-              when the team is trying to stay focused on guests.
-            </p>
+            {copy.aboutText.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
         </section>
 
         <section className="services-section page-band" id="services" aria-labelledby="services-title">
           <div className="section-heading">
-            <p className="eyebrow">Services</p>
-            <h2 id="services-title">Technical support that stays grounded in outcomes.</h2>
+            <p className="eyebrow">{copy.servicesEyebrow}</p>
+            <h2 id="services-title">{copy.servicesTitle}</h2>
           </div>
 
           <div className="service-grid">
-            <article className="service-card">
-              <ServiceIcon Icon={MonitorCog} />
-              <h3>POS Terminal and Printer Install</h3>
-              <p>Terminal setup, printer installation, device checks, and troubleshooting when stations or printers are not communicating.</p>
-            </article>
-            <article className="service-card">
-              <ServiceIcon Icon={ClipboardCheck} />
-              <h3>Menu Help</h3>
-              <p>Building, editing, and routing menus so items, prep stations, and print paths are organized for real service workflows.</p>
-            </article>
-            <article className="service-card">
-              <ServiceIcon Icon={Network} />
-              <h3>Networking Setup</h3>
-              <p>Toast router, switch, printer, and connected-device setup with practical troubleshooting across the local network.</p>
-            </article>
-            <article className="service-card">
-              <ServiceIcon Icon={Store} />
-              <h3>New Restaurant Setup</h3>
-              <p>Hands-on support for new locations, including Toast hardware, menus, printers, routing, and launch-ready system checks.</p>
-            </article>
-            <article className="service-card">
-              <ServiceIcon Icon={RadioTower} />
-              <h3>GO LIVE! Support</h3>
-              <p>Opening-day support for Toast launches, with on-site or remote options to help teams troubleshoot and keep service moving.</p>
-            </article>
-            <article className="service-card">
-              <ServiceIcon Icon={CookingPot} />
-              <h3>Post-Launch Cleanup</h3>
-              <p>Follow-up support after opening day to adjust menus, fix routing issues, clean up device settings, and smooth out team workflows.</p>
-            </article>
+            {copy.services.map(([title, description], index) => (
+              <article className="service-card" key={title}>
+                <ServiceIcon Icon={serviceIcons[index]} />
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </article>
+            ))}
           </div>
         </section>
 
         <section className="contact-section" id="contact" aria-labelledby="contact-title">
           <div>
-            <p className="eyebrow">Contact</p>
-            <h2 id="contact-title">Need a system installed, cleaned up, or brought back online?</h2>
+            <p className="eyebrow">{copy.contactEyebrow}</p>
+            <h2 id="contact-title">{copy.contactTitle}</h2>
             <p>
-              I am available for installation, troubleshooting, technical setup work,
-              and field support projects.
+              {copy.contactText}
             </p>
           </div>
 
@@ -526,13 +593,17 @@ function App() {
               className="button primary"
               href="/consultation"
             >
-              Schedule free consultation!
+              {copy.consultation}
             </a>
-            <a className="button secondary" href="mailto:jonshelley85@gmail.com">Email me</a>
-            <a className="button secondary" href="tel:+17173306130">Call me</a>
+            <a className="button secondary" href="mailto:jonshelley85@gmail.com">{copy.email}</a>
+            <a className="button secondary" href="tel:+17173306130">{copy.call}</a>
           </div>
         </section>
       </main>
+
+      <footer className="site-footer">
+        <span>{copy.footer}</span>
+      </footer>
     </div>
   );
 }
