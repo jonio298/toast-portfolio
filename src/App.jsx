@@ -479,8 +479,8 @@ function App() {
             >
               Schedule free consultation!
             </a>
-            <a className="button secondary" href="mailto:your.email@example.com">Email me</a>
-            <a className="button secondary" href="tel:+15055550123">Call me</a>
+            <a className="button secondary" href="mailto:jonshelley85@gmail.com">Email me</a>
+            <a className="button secondary" href="tel:+17173306130">Call me</a>
           </div>
         </section>
       </main>
