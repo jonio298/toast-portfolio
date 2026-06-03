@@ -392,10 +392,10 @@ function App() {
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-copy">
             <p className="eyebrow">Toast POS systems / menu help / printers / network installs</p>
-            <h2 id="hero-title">Reliable, experienced restaurant tech, installed and fixed in the field.</h2>
+            <h2 id="hero-title">Restaurant tech that works when service starts.</h2>
             <p className="hero-lede">
-              I help restaurants get Toast front-end workflows and back-end setup online,
-              routed, printing, and ready for real service pressure.
+              Toast setup, menu routing, printers, networking, and go-live support for
+              restaurants that need reliable systems on day one.
             </p>
 
             <div className="hero-actions" aria-label="Main actions">
