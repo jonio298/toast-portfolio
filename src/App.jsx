@@ -22,37 +22,7 @@ function ConsultationPage() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    setStatus('sending');
-
-    const message = [
-      `Name: ${formData.name}`,
-      `Name of restaurant: ${formData.restaurant}`,
-      `Location: ${formData.location}`,
-      `Phone number: ${formData.phone}`,
-      `Preferred time to talk: ${formData.preferredTime}`,
-      '',
-      'What do you need help with?',
-      formData.details,
-    ].join('\n');
-
-    try {
-      const response = await fetch('/api/consultation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Request failed');
-      }
-
-      setStatus('sent');
-      setFormData(emptyConsultation);
-    } catch {
-      setStatus('error');
-    }
+    setStatus('sent');
   }
 
   return (
@@ -74,8 +44,8 @@ function ConsultationPage() {
           <br>
           </br>
           <p>
-            Fill in the details below and hit send. While this site is running locally,
-            the request will be saved to a text file on this computer.
+            Fill in the details below. The form layout is ready, and the send action will
+            be connected once the site has hosted request storage.
           </p>
 
           <form className="consultation-form" onSubmit={handleSubmit}>
@@ -129,10 +99,10 @@ function ConsultationPage() {
               />
             </div>
             <button className="button primary" type="submit" disabled={status === 'sending'}>
-              {status === 'sending' ? 'Saving request...' : 'Send consultation request'}
+              Preview consultation request
             </button>
             {status === 'sent' && (
-              <p className="form-status success">Saved to consultation-requests.txt.</p>
+              <p className="form-status success">Looks good. Sending will be connected after hosting storage is set up.</p>
             )}
             {status === 'error' && (
               <p className="form-status error">Could not save the request. Make sure the local dev server is running.</p>
@@ -480,16 +450,16 @@ function App() {
 
             <div className="metrics-grid">
               <div>
-                <span>Response</span>
-                <strong>Service-ready systems</strong>
+                <span>Terminals</span>
+                <strong>POS + printers online</strong>
               </div>
               <div>
-                <span>Focus</span>
-                <strong>Install to uptime</strong>
+                <span>Menus</span>
+                <strong>Items routed correctly</strong>
               </div>
               <div>
-                <span>Environment</span>
-                <strong>Restaurants + offices</strong>
+                <span>Network</span>
+                <strong>Router + switch checked</strong>
               </div>
             </div>
           </div>
