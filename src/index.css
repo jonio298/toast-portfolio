@@ -331,6 +331,14 @@ h3 {
   font-weight: 800;
 }
 
+.live-word {
+  color: #ff6a58;
+  font: inherit;
+  text-shadow:
+    0 0 7px rgba(255, 94, 78, 0.85),
+    0 0 18px rgba(255, 94, 78, 0.42);
+}
+
 .status-pill {
   display: inline-flex;
   align-items: center;
@@ -377,7 +385,7 @@ h3 {
 }
 
 .map-label span,
-.metrics-grid span {
+.metrics-grid div > span:not(.metric-leds) {
   display: block;
   margin-bottom: 7px;
   color: #b8b1a8;
@@ -404,17 +412,66 @@ h3 {
 .state-shape {
   stroke-linejoin: round;
   stroke-width: 2;
+  transition:
+    fill 180ms ease,
+    stroke 180ms ease,
+    filter 180ms ease,
+    transform 180ms ease;
 }
 
 .state-muted {
   fill: rgba(245, 241, 234, 0.045);
   stroke: rgba(245, 241, 234, 0.18);
+  cursor: pointer;
+}
+
+.state-muted:hover {
+  fill: rgba(166, 90, 58, 0.34);
+  stroke: rgba(255, 106, 88, 0.86);
+  filter: drop-shadow(0 0 14px rgba(255, 94, 78, 0.34));
+}
+
+.state-tooltip {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+
+.state-tooltip rect {
+  fill: rgba(16, 17, 18, 0.94);
+  stroke: rgba(255, 106, 88, 0.62);
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 12px rgba(255, 94, 78, 0.28));
+}
+
+.state-tooltip text {
+  fill: #ffe39a;
+  font-size: 11px;
+  font-weight: 900;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+.inactive-state-group:hover .state-tooltip {
+  opacity: 1;
 }
 
 .state-new-mexico {
   fill: rgba(166, 90, 58, 0.2);
   stroke: rgba(215, 185, 142, 0.78);
   filter: drop-shadow(0 0 16px rgba(166, 90, 58, 0.18));
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.state-new-mexico:hover {
+  fill: rgba(215, 185, 142, 0.28);
+  stroke: rgba(255, 227, 154, 0.95);
+  filter:
+    drop-shadow(0 0 16px rgba(255, 227, 154, 0.58))
+    drop-shadow(0 0 30px rgba(215, 185, 142, 0.3));
+  transform: scale(1.045);
 }
 
 .state-line {
@@ -498,6 +555,46 @@ h3 {
   border-left: 1px solid rgba(245, 241, 234, 0.1);
 }
 
+.metric-leds {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.metric-led {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+}
+
+.metric-led.red {
+  background: #9f3d36;
+  border: 1px solid rgba(255, 150, 135, 0.28);
+  box-shadow:
+    inset 0 0 4px rgba(0, 0, 0, 0.58),
+    0 0 5px rgba(255, 94, 78, 0.18);
+  opacity: 0.72;
+}
+
+.metric-led.green {
+  background: #6cff95;
+  animation: routerBlink 0.9s steps(2, end) infinite;
+  box-shadow:
+    0 0 8px rgba(108, 255, 149, 0.98),
+    0 0 20px rgba(108, 255, 149, 0.58),
+    0 0 32px rgba(108, 255, 149, 0.28);
+}
+
+.metrics-grid div:nth-child(2) .metric-led.green {
+  animation-duration: 0.58s;
+  animation-delay: 0.16s;
+}
+
+.metrics-grid div:nth-child(3) .metric-led.green {
+  animation-duration: 0.72s;
+  animation-delay: 0.31s;
+}
+
 @keyframes radarPulse {
   0% {
     opacity: 0;
@@ -524,6 +621,24 @@ h3 {
   50% {
     opacity: 1;
     transform: scale(1.08);
+  }
+}
+
+@keyframes routerBlink {
+  0%,
+  18%,
+  42%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  19%,
+  30%,
+  43%,
+  58% {
+    opacity: 0.42;
+    transform: scale(0.86);
   }
 }
 

@@ -406,7 +406,7 @@ function App() {
 
           <div className="systems-panel" aria-label="Field systems overview">
             <div className="panel-topline">
-              <span>LIVE FIELD READOUT</span>
+              <span><strong className="live-word">LIVE</strong> FIELD READOUT</span>
               <span className="status-pill">
                 <span className="status-led" aria-hidden="true" />
                 Ready
@@ -421,11 +421,41 @@ function App() {
 
               <svg className="us-map" viewBox="0 0 640 390" role="img" aria-label="Regional Southwest map with a radar marker near Santa Fe, New Mexico">
                 <g className="regional-map">
-                  <path className="state-shape state-muted" d="M126 118 L264 118 L264 292 L224 292 L208 312 L144 298 L126 218 Z" />
-                  <path className="state-shape state-muted" d="M264 66 L408 66 L408 118 L264 118 Z" />
-                  <path className="state-shape state-muted" d="M408 118 L486 118 L486 164 L408 164 Z" />
-                  <path className="state-shape state-muted" d="M408 164 L524 164 L548 232 L516 312 L456 300 L424 264 L408 264 Z" />
-                  <path className="state-shape state-muted" d="M300 300 L424 264 L456 300 L420 336 L304 336 Z" />
+                  <g className="inactive-state-group">
+                    <path className="state-shape state-muted state-az" d="M126 118 L264 118 L264 292 L224 292 L208 312 L144 298 L126 218 Z" />
+                    <g className="state-tooltip" transform="translate(156 196)">
+                      <rect width="82" height="24" rx="7" />
+                      <text x="41" y="16">maybe soon</text>
+                    </g>
+                  </g>
+                  <g className="inactive-state-group">
+                    <path className="state-shape state-muted state-co" d="M264 66 L408 66 L408 118 L264 118 Z" />
+                    <g className="state-tooltip" transform="translate(286 84)">
+                      <rect width="82" height="24" rx="7" />
+                      <text x="41" y="16">maybe soon</text>
+                    </g>
+                  </g>
+                  <g className="inactive-state-group">
+                    <path className="state-shape state-muted state-ok" d="M408 118 L486 118 L486 164 L408 164 Z" />
+                    <g className="state-tooltip" transform="translate(408 130)">
+                      <rect width="82" height="24" rx="7" />
+                      <text x="41" y="16">maybe soon</text>
+                    </g>
+                  </g>
+                  <g className="inactive-state-group">
+                    <path className="state-shape state-muted state-tx" d="M408 164 L524 164 L548 232 L516 312 L456 300 L424 264 L408 264 Z" />
+                    <g className="state-tooltip" transform="translate(444 214)">
+                      <rect width="82" height="24" rx="7" />
+                      <text x="41" y="16">maybe soon</text>
+                    </g>
+                  </g>
+                  <g className="inactive-state-group">
+                    <path className="state-shape state-muted state-mx" d="M300 300 L424 264 L456 300 L420 336 L304 336 Z" />
+                    <g className="state-tooltip" transform="translate(328 303)">
+                      <rect width="82" height="24" rx="7" />
+                      <text x="41" y="16">maybe soon</text>
+                    </g>
+                  </g>
                   <path className="state-shape state-new-mexico" d="M264 118 L408 118 L408 264 L424 264 L424 300 L300 300 L300 284 L264 284 Z" />
 
                   <path className="state-line" d="M264 118 L408 118 M264 284 L300 284 L300 300 M408 164 L486 164 M408 264 L424 264 M300 300 L424 300" />
@@ -450,14 +480,26 @@ function App() {
 
             <div className="metrics-grid">
               <div>
+                <span className="metric-leds" aria-hidden="true">
+                  <span className="metric-led green" />
+                  <span className="metric-led red" />
+                </span>
                 <span>Terminals</span>
                 <strong>POS + printers online</strong>
               </div>
               <div>
+                <span className="metric-leds" aria-hidden="true">
+                  <span className="metric-led green" />
+                  <span className="metric-led red" />
+                </span>
                 <span>Menus</span>
                 <strong>Items routed correctly</strong>
               </div>
               <div>
+                <span className="metric-leds" aria-hidden="true">
+                  <span className="metric-led green" />
+                  <span className="metric-led red" />
+                </span>
                 <span>Network</span>
                 <strong>Router + switch checked</strong>
               </div>
