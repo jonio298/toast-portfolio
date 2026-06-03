@@ -1,0 +1,12 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Jonathan Shelley field tech monogram</title>
+  <desc id="desc">A JS monogram with a warm field signal mark inspired by restaurant systems and Southwest service coverage.</desc>
+  <rect x="22" y="22" width="212" height="212" rx="34" fill="#D7B98E"/>
+  <rect x="22" y="22" width="212" height="212" rx="34" stroke="#F5F1EA" stroke-opacity=".35" stroke-width="3"/>
+  <path d="M72 74H118V151C118 173 104 189 80 189C68 189 58 186 50 180L59 157C65 162 71 164 78 164C88 164 94 158 94 147V98H72V74Z" fill="#101112"/>
+  <path d="M146 185C130 185 116 180 106 172L118 150C126 156 137 160 148 160C159 160 166 156 166 149C166 136 111 142 111 105C111 86 127 72 153 72C166 72 179 75 189 81L179 103C170 98 161 96 153 96C143 96 137 100 137 107C137 120 192 114 192 150C192 169 175 185 146 185Z" fill="#101112"/>
+  <circle cx="191" cy="73" r="11" fill="#FFE39A"/>
+  <circle cx="191" cy="73" r="24" stroke="#101112" stroke-opacity=".26" stroke-width="4"/>
+  <circle cx="191" cy="73" r="39" stroke="#101112" stroke-opacity=".14" stroke-width="4"/>
+  <path d="M177 91L156 118" stroke="#A65A3A" stroke-width="7" stroke-linecap="round"/>
+</svg>
