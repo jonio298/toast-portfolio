@@ -302,7 +302,7 @@ const pageCopy = {
       ['Network', 'Router + switch checked'],
     ],
     aboutEyebrow: 'About me',
-    aboutTitle: 'I work where software meets messy real-world hardware.',
+    aboutTitle: 'I understand the restaurant floor and the systems behind it.',
     aboutText: [
       'I have installed Toast systems and built menus for restaurants across the country, helping teams get terminals, printers, routing, and menu workflows ready for service.',
       'I know restaurants inside and out. With years of experience in both the kitchen and front of house, I understand how a restaurant actually operates, how fast problems need to be solved, and how important clear communication is when the team is trying to stay focused on guests.',
@@ -347,7 +347,7 @@ const pageCopy = {
       ['Red', 'Router + switch revisados'],
     ],
     aboutEyebrow: 'Sobre mi',
-    aboutTitle: 'Trabajo donde el software se encuentra con hardware del mundo real.',
+    aboutTitle: 'Entiendo el piso del restaurante y los sistemas que lo mantienen funcionando.',
     aboutText: [
       'He instalado sistemas Toast y construido menus para restaurantes en todo el pais, ayudando a equipos a dejar terminales, impresoras, rutas y flujos de menu listos para el servicio.',
       'Conozco los restaurantes por dentro y por fuera. Con anos de experiencia en cocina y frente de casa, entiendo como opera un restaurante, que tan rapido se deben resolver los problemas y la importancia de comunicarse claro cuando el equipo esta enfocado en los clientes.',
