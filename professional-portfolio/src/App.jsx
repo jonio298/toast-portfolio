@@ -125,9 +125,9 @@ const skillGroups = [
 
 function Brand() {
   return (
-    <a className="brand" href="/#top" aria-label="Jonathan Shelley home">
+    <a className="brand" href="/#top" aria-label="Roaming Creations Studio home">
       <img src="/jonathan-shelley-logo.svg" alt="" />
-      <span><b>Jonathan Shelley</b><small>Designer · Developer · Technician</small></span>
+      <span><b>Roaming Creations Studio</b><small>Jonathan Shelley · Designer · Developer</small></span>
     </a>
   )
 }
@@ -241,7 +241,7 @@ function Home() {
       <main id="top">
         <section className="hero">
           <div>
-            <p className="eyebrow">WEB DESIGN · GAME DESIGN · TECHNICAL SYSTEMS</p>
+            <p className="eyebrow">ROAMING CREATIONS STUDIO · WEB · GAME · TECH</p>
             <h1>I build useful things with <span>character.</span></h1>
             <p className="lede">I’m Jonathan Shelley—a designer and developer who combines creative ideas with hands-on technical experience. I build responsive websites, game systems, and reliable real-world installations.</p>
             <p className="remote-statement">After a year of traveling, I’ve built a reliable remote setup and a working rhythm that lets me contribute from anywhere. I’m looking for a genuinely remote role with a team that values consistency, ownership, and thoughtful work.</p>
@@ -373,7 +373,7 @@ function PhotographyPage() {
 }
 
 function Footer() {
-  return <footer><span>Designed & built by Jonathan Shelley</span><span>React · 2026</span></footer>
+  return <footer><span>Roaming Creations Studio · Jonathan Shelley</span><span>React · 2026</span></footer>
 }
 
 function GamePage() {
