@@ -234,38 +234,18 @@ function WorkStyle() {
   )
 }
 
-function StudioLanding() {
-  const [paused, setPaused] = useState(false)
-  const stillLogo = '/roaming-sketch-studio-still.png'
-
-  return (
-    <section className="studio-landing" aria-label="Roaming Sketch Studio" data-paused={paused}>
-      <div className="landing-art">
-        <picture>
-          <source media="(prefers-reduced-motion: reduce)" srcSet={stillLogo} />
-          <img
-            src={paused ? stillLogo : '/roaming-sketch-studio-takeoff.gif'}
-            alt="Roaming Sketch Studio logo: an RV driving through a mountain scene on a laptop, trailing dust"
-            width="314"
-            height="270"
-            fetchPriority="high"
-          />
-        </picture>
-      </div>
-      <button className="animation-toggle" type="button" onClick={() => setPaused(!paused)}>
-        {paused ? 'Play animation' : 'Pause animation'}
-      </button>
-      <a className="explore-button" href="#explore">Explore more <ChevronDown /></a>
-    </section>
-  )
-}
-
 function Home() {
   return (
     <div className="shell">
       <Header />
       <main id="top">
-        <StudioLanding />
+        <section className="studio-landing" aria-label="Roaming Sketch Studio">
+          <div className="landing-art">
+            <img src="/roaming-sketch-studio-hero.png" alt="Roaming Sketch Studio artwork featuring a laptop, RV, mountains, and compass" />
+            <span className="sun-glow" aria-hidden="true" />
+          </div>
+          <a className="explore-button" href="#explore">Explore more <ChevronDown /></a>
+        </section>
 
         <section className="hero home-overview" id="explore">
           <div>

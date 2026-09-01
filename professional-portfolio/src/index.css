@@ -36,13 +36,10 @@ header button { display: none; border: 0; color: var(--cream); background: none;
 
 .studio-landing { position: relative; left: 50%; display: grid; width: min(1536px, 100vw); min-height: calc(100svh - 96px); margin-left: -50vw; place-items: center; overflow: hidden; isolation: isolate; background: #020607; }
 .studio-landing::before { position: absolute; z-index: -1; inset: 12% 10%; border-radius: 50%; background: radial-gradient(circle, rgba(63, 112, 137, .2), transparent 68%); content: ''; filter: blur(35px); animation: ambientBreathe 7s ease-in-out infinite; }
-.landing-art { position: relative; width: min(628px, 100%); overflow: hidden; }
-.landing-art picture { display: block; }
-.landing-art img { display: block; width: 100%; height: auto; max-height: calc(100svh - 220px); object-fit: contain; }
-.animation-toggle { position: absolute; z-index: 3; top: 18px; right: clamp(18px, 4vw, 58px); min-height: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 6px; color: var(--cream); background: #15191a; font: inherit; font-size: .875rem; cursor: pointer; }
-.animation-toggle:hover { border-color: var(--gold); }
-.animation-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
-.studio-landing[data-paused="true"]::before, .studio-landing[data-paused="true"] .explore-button svg { animation-play-state: paused; }
+.landing-art { position: relative; width: 100%; overflow: hidden; animation: landingDrift 10s ease-in-out infinite; }
+.landing-art::after { position: absolute; inset: -20% auto -20% -32%; width: 18%; background: linear-gradient(105deg, transparent, rgba(255, 246, 212, .12), transparent); content: ''; transform: skewX(-12deg); animation: screenSheen 9s ease-in-out infinite; pointer-events: none; }
+.landing-art img { display: block; width: 100%; max-height: calc(100svh - 96px); object-fit: contain; }
+.sun-glow { position: absolute; top: 15.3%; left: 59.1%; width: 8.3%; aspect-ratio: 1; border-radius: 50%; background: rgba(255, 184, 50, .2); box-shadow: 0 0 24px 8px rgba(255, 184, 50, .2), 0 0 70px 24px rgba(255, 184, 50, .12); animation: sunPulse 4.5s ease-in-out infinite; mix-blend-mode: screen; pointer-events: none; }
 .explore-button { position: absolute; z-index: 3; right: clamp(18px, 4vw, 58px); bottom: clamp(18px, 3vw, 40px); display: inline-flex; min-height: 52px; padding: 0 22px; border: 1px solid rgba(255, 217, 107, .7); border-radius: 999px; align-items: center; gap: 10px; color: #101112; background: rgba(255, 217, 107, .94); box-shadow: 0 12px 34px rgba(0, 0, 0, .42), 0 0 30px rgba(255, 217, 107, .16); font-size: .78rem; font-weight: 800; text-decoration: none; transition: transform .2s, box-shadow .2s; }
 .explore-button:hover { transform: translateY(-3px); box-shadow: 0 16px 38px rgba(0, 0, 0, .5), 0 0 38px rgba(255, 217, 107, .25); }
 .explore-button svg { width: 17px; animation: exploreNudge 2s ease-in-out infinite; }
@@ -226,7 +223,7 @@ footer { display: flex; justify-content: space-between; padding: 24px 0 34px; bo
   nav.open { display: grid; }
   header button { display: block; }
   .studio-landing { min-height: calc(100svh - 78px); }
-  .landing-art img { max-height: calc(100svh - 202px); }
+  .landing-art img { max-height: calc(100svh - 78px); }
   .explore-button { right: 50%; bottom: 18px; min-height: 46px; padding: 0 18px; transform: translateX(50%); }
   .explore-button:hover { transform: translateX(50%) translateY(-3px); }
   .hero { min-height: auto; padding: 56px 0 72px; }
@@ -260,7 +257,6 @@ footer { display: flex; justify-content: space-between; padding: 24px 0 34px; bo
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animation-toggle { display: none; }
   html { scroll-behavior: auto; }
   .pulse { animation: none; }
   .location-status { animation: none; }
