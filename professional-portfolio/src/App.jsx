@@ -165,9 +165,12 @@ function LocationRadar() {
           <circle className="pulse p1" cx="348" cy="170" r="28" /><circle className="pulse p2" cx="348" cy="170" r="52" /><circle className="pulse p3" cx="348" cy="170" r="78" />
           <circle className="map-core" cx="348" cy="170" r="10" />
         </svg>
-        <span className="discipline web"><Code2 />Web design</span>
-        <span className="discipline game"><Gamepad2 />Game design</span>
-        <span className="discipline field"><Network />Field tech</span>
+        <div className="discipline-list" aria-label="Skills">
+          <strong>Skills:</strong>
+          <span className="discipline"><Code2 />Web design</span>
+          <span className="discipline"><Gamepad2 />Game design</span>
+          <span className="discipline"><Network />Field tech</span>
+        </div>
       </div>
       <div className="readouts">
         <span><i />BUILDING<b>Responsive interfaces</b></span>
@@ -241,6 +244,7 @@ function Home() {
             <p className="eyebrow">WEB DESIGN · GAME DESIGN · TECHNICAL SYSTEMS</p>
             <h1>I build useful things with <span>character.</span></h1>
             <p className="lede">I’m Jonathan Shelley—a designer and developer who combines creative ideas with hands-on technical experience. I build responsive websites, game systems, and reliable real-world installations.</p>
+            <p className="remote-statement">After a year of traveling, I’ve built a reliable remote setup and a working rhythm that lets me contribute from anywhere. I’m looking for a genuinely remote role with a team that values consistency, ownership, and thoughtful work.</p>
             <div className="actions"><a className="button primary" href="#projects">See my work <ArrowUpRight size={18} /></a><a className="button" href="mailto:jonio298@gmail.com">Let’s talk</a></div>
             <div className="facts"><span><MapPin />Santa Fe, New Mexico</span><span><RadioTower />Seeking full-time remote work</span></div>
           </div>
