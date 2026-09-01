@@ -272,7 +272,7 @@ function Home() {
           <img src="/roaming-sketch-studio-hero.png" alt="Roaming Sketch Studio artwork featuring a laptop, RV, mountains, and compass" fetchPriority="high" />
           <span className="sun-glow" aria-hidden="true" />
         </div>
-        <button className="explore-button" type="button" onClick={exploreSite} disabled={stage === 'leaving'}>Explore more <ChevronDown /></button>
+        <button className="explore-button" type="button" onClick={exploreSite} disabled={stage === 'leaving'}>Explore <ChevronDown /></button>
       </main>
     )
   }
