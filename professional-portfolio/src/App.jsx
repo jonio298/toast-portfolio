@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -126,7 +126,7 @@ const skillGroups = [
 
 function Brand() {
   return (
-    <a className="brand" href="/#top" aria-label="Roaming Sketch Studio home">
+    <a className="brand" href="/#explore" aria-label="Roaming Sketch Studio home">
       <img src="/jonathan-shelley-logo.svg" alt="" />
       <span><b>Roaming Sketch Studio</b><small>Jonathan Shelley · Designer · Developer</small></span>
     </a>
@@ -140,7 +140,7 @@ function Header() {
       <Brand />
       <div className="location"><span className="location-status"><i aria-hidden="true" /><small>Current location</small></span><b>Santa Fe</b></div>
       <nav className={open ? 'open' : ''} aria-label="Primary navigation">
-        <a href="/#projects" onClick={() => setOpen(false)}>Projects</a>
+        <a href="/projects" onClick={() => setOpen(false)}>Projects</a>
         <a href="/resume" onClick={() => setOpen(false)}>Experience & Skills</a>
         <a href="/bio" onClick={() => setOpen(false)}>Bio</a>
       </nav>
@@ -235,24 +235,58 @@ function WorkStyle() {
 }
 
 function Home() {
+  const [stage, setStage] = useState(() => location.hash ? 'site' : 'landing')
+  const headingRef = useRef(null)
+  const enteredFromLanding = useRef(false)
+
+  useEffect(() => {
+    if (stage === 'site') {
+      if (enteredFromLanding.current) headingRef.current?.focus({ preventScroll: true })
+      return
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const timer = stage === 'leaving'
+      ? window.setTimeout(() => setStage('site'), window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 550)
+      : null
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      if (timer !== null) window.clearTimeout(timer)
+    }
+  }, [stage])
+
+  function exploreSite() {
+    enteredFromLanding.current = true
+    const url = new URL(window.location.href)
+    url.hash = 'explore'
+    window.history.replaceState(window.history.state, '', url)
+    setStage('leaving')
+  }
+
+  if (stage !== 'site') {
+    return (
+      <main className={`studio-landing${stage === 'leaving' ? ' is-leaving' : ''}`} aria-label="Roaming Sketch Studio">
+        <div className="landing-art">
+          <img src="/roaming-sketch-studio-hero.png" alt="Roaming Sketch Studio artwork featuring a laptop, RV, mountains, and compass" fetchPriority="high" />
+          <span className="sun-glow" aria-hidden="true" />
+        </div>
+        <button className="explore-button" type="button" onClick={exploreSite} disabled={stage === 'leaving'}>Explore more <ChevronDown /></button>
+      </main>
+    )
+  }
+
   return (
-    <div className="shell">
+    <div className={`shell${enteredFromLanding.current ? ' site-reveal' : ''}`}>
       <Header />
       <main id="top">
-        <section className="studio-landing" aria-label="Roaming Sketch Studio">
-          <div className="landing-art">
-            <img src="/roaming-sketch-studio-hero.png" alt="Roaming Sketch Studio artwork featuring a laptop, RV, mountains, and compass" />
-            <span className="sun-glow" aria-hidden="true" />
-          </div>
-          <a className="explore-button" href="#explore">Explore more <ChevronDown /></a>
-        </section>
-
         <section className="hero home-overview" id="explore">
           <div>
             <p className="eyebrow">ROAMING SKETCH STUDIO · WEB · GAME · TECH</p>
-            <h1>I build useful things with <span>character.</span></h1>
+            <h1 ref={headingRef} tabIndex={-1}>I build useful things with <span>character.</span></h1>
             <p className="lede">I’m Jonathan Shelley—a designer and developer who combines creative ideas with hands-on technical experience. I build responsive websites, game systems, and reliable real-world installations.</p>
-            <div className="actions"><a className="button primary" href="#projects">See my work <ArrowUpRight size={18} /></a><a className="button" href="mailto:jonio298@gmail.com">Let’s talk</a></div>
+            <div className="actions"><a className="button primary" href="/projects">See my work <ArrowUpRight size={18} /></a><a className="button" href="mailto:jonio298@gmail.com">Let’s talk</a></div>
             <div className="facts"><span><MapPin />Santa Fe, New Mexico</span><span><RadioTower />Reliable Starlink workspace</span></div>
           </div>
           <LocationRadar />
@@ -260,14 +294,29 @@ function Home() {
 
         <WorkStyle />
 
-        <section className="section" id="projects">
-          <Intro eyebrow="SELECTED WORK" title="Projects that show how I think." copy="Creative concepts backed by working systems, deliberate interfaces, and the persistence to keep improving them." />
-          <div className="projects">{projects.map((project) => <Project project={project} key={project.title} />)}</div>
-        </section>
-
         <section className="contact" id="contact">
           <div><p className="eyebrow">CONTACT</p><h2>Let’s build something useful together.</h2><p>Have a web project, game system, or technical challenge that could use a creative and dependable perspective? I’d love to hear about it.</p></div>
           <div className="actions"><a className="button primary" href="mailto:jonio298@gmail.com"><Mail />Email me</a><a className="button" href="https://github.com/jonio298" target="_blank" rel="noreferrer"><Code2 />GitHub</a></div>
+        </section>
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
+function ProjectsPage() {
+  return (
+    <div className="shell projects-page">
+      <Header />
+      <main>
+        <a className="back" href="/#explore"><ArrowLeft />Back home</a>
+        <section className="projects-intro" aria-labelledby="projects-title">
+          <p className="eyebrow">SELECTED WORK</p>
+          <h1 id="projects-title">Projects that show how I <span>think.</span></h1>
+          <p className="lede">Creative concepts backed by working systems, deliberate interfaces, and the persistence to keep improving them.</p>
+        </section>
+        <section className="projects projects-list" aria-label="Portfolio projects">
+          {projects.map((project) => <Project project={project} key={project.title} />)}
         </section>
       </main>
       <Footer />
@@ -280,7 +329,7 @@ function ResumePage() {
     <div className="shell resume-page">
       <Header />
       <main>
-        <a className="back" href="/"><ArrowLeft />Back home</a>
+        <a className="back" href="/#explore"><ArrowLeft />Back home</a>
         <section className="resume-hero">
           <div><p className="eyebrow">EXPERIENCE & SKILLS</p><h1>A creative technologist who knows how to <span>deliver.</span></h1></div>
           <p className="lede">My experience crosses web development, game design, networking, and hands-on field implementation. That range helps me see the whole system—not just the part in front of me.</p>
@@ -323,7 +372,7 @@ function BioPage() {
     <div className="shell bio-page">
       <Header />
       <main>
-        <a className="back" href="/"><ArrowLeft />Back home</a>
+        <a className="back" href="/#explore"><ArrowLeft />Back home</a>
         <section className="bio-hero">
           <div>
             <p className="eyebrow">A LITTLE MORE ABOUT ME</p>
@@ -388,7 +437,7 @@ function GamePage() {
     <div className="shell">
       <Header />
       <main>
-        <a className="back" href="/#projects"><ArrowLeft />All projects</a>
+        <a className="back" href="/projects"><ArrowLeft />All projects</a>
         <section className="case-hero">
           <div><p className="eyebrow">INDEPENDENT GAME PROJECT · PLAYABLE NOW</p><h1>Chalkboard<br /><span>Dungeon</span></h1><p className="lede">A playful action dungeon built around hand-drawn classroom energy, water-powered combat, procedural rewards, and systems that invite experimentation.</p><Tags items={['Godot', 'GDScript', 'Solo development', 'Game design']} /><a className="button primary case-play" href="/chalkboard-dungeon/index.html"><Play fill="currentColor" />Play Chalkboard Dungeon</a></div>
           <div className="case-art logo-case"><img src="/chalkboard-dungeon-logo.png" alt="Chalkboard Dungeon logo" /><small>Original game logo</small></div>
@@ -405,6 +454,7 @@ function GamePage() {
 
 export default function App() {
   if (location.pathname.startsWith('/projects/chalkboard-dungeon')) return <GamePage />
+  if (location.pathname === '/projects' || location.pathname === '/projects/') return <ProjectsPage />
   if (location.pathname.startsWith('/resume')) return <ResumePage />
   if (location.pathname.startsWith('/photography')) return <PhotographyPage />
   if (location.pathname.startsWith('/bio')) return <BioPage />

@@ -34,15 +34,20 @@ nav a { color: #d2ccc4; font-size: .82rem; font-weight: 700; text-decoration: no
 nav a:hover { color: var(--gold); }
 header button { display: none; border: 0; color: var(--cream); background: none; }
 
-.studio-landing { position: relative; left: 50%; display: grid; width: min(1536px, 100vw); min-height: calc(100svh - 96px); margin-left: -50vw; place-items: center; overflow: hidden; isolation: isolate; background: #020607; }
+.studio-landing { position: fixed; z-index: 20; inset: 0; display: grid; place-items: center; overflow: hidden; isolation: isolate; background: #020607; opacity: 1; transition: opacity 550ms ease; }
+.studio-landing.is-leaving { opacity: 0; pointer-events: none; }
+.site-reveal { animation: siteFadeIn 700ms ease both; }
+@keyframes siteFadeIn { from { opacity: 0; } to { opacity: 1; } }
 .studio-landing::before { position: absolute; z-index: -1; inset: 12% 10%; border-radius: 50%; background: radial-gradient(circle, rgba(63, 112, 137, .2), transparent 68%); content: ''; filter: blur(35px); animation: ambientBreathe 7s ease-in-out infinite; }
-.landing-art { position: relative; width: 100%; overflow: hidden; animation: landingDrift 10s ease-in-out infinite; }
+.landing-art { position: relative; width: min(1536px, 100%); overflow: hidden; animation: landingDrift 10s ease-in-out infinite; }
 .landing-art::after { position: absolute; inset: -20% auto -20% -32%; width: 18%; background: linear-gradient(105deg, transparent, rgba(255, 246, 212, .12), transparent); content: ''; transform: skewX(-12deg); animation: screenSheen 9s ease-in-out infinite; pointer-events: none; }
-.landing-art img { display: block; width: 100%; max-height: calc(100svh - 96px); object-fit: contain; }
+.landing-art img { display: block; width: 100%; max-height: 100svh; object-fit: contain; }
 .sun-glow { position: absolute; top: 15.3%; left: 59.1%; width: 8.3%; aspect-ratio: 1; border-radius: 50%; background: rgba(255, 184, 50, .2); box-shadow: 0 0 24px 8px rgba(255, 184, 50, .2), 0 0 70px 24px rgba(255, 184, 50, .12); animation: sunPulse 4.5s ease-in-out infinite; mix-blend-mode: screen; pointer-events: none; }
 .explore-button { position: absolute; z-index: 3; right: clamp(18px, 4vw, 58px); bottom: clamp(18px, 3vw, 40px); display: inline-flex; min-height: 52px; padding: 0 22px; border: 1px solid rgba(255, 217, 107, .7); border-radius: 999px; align-items: center; gap: 10px; color: #101112; background: rgba(255, 217, 107, .94); box-shadow: 0 12px 34px rgba(0, 0, 0, .42), 0 0 30px rgba(255, 217, 107, .16); font-size: .78rem; font-weight: 800; text-decoration: none; transition: transform .2s, box-shadow .2s; }
 .explore-button:hover { transform: translateY(-3px); box-shadow: 0 16px 38px rgba(0, 0, 0, .5), 0 0 38px rgba(255, 217, 107, .25); }
 .explore-button svg { width: 17px; animation: exploreNudge 2s ease-in-out infinite; }
+.explore-button { font-family: inherit; cursor: pointer; }
+.explore-button:focus-visible { outline: 3px solid var(--cream); outline-offset: 5px; }
 
 .hero { display: grid; grid-template-columns: .92fr 1.08fr; gap: 62px; align-items: center; min-height: 680px; padding: 78px 0 92px; }
 .home-overview { scroll-margin-top: 18px; }
@@ -110,7 +115,10 @@ h3 { margin-bottom: 9px; font-size: 1.35rem; }
 .remote-note > p:last-child { margin-bottom: 0; color: #9e978f; font-size: .8rem; line-height: 1.65; }
 
 .section { display: grid; grid-template-columns: .72fr 1.28fr; gap: 70px; padding: 104px 0; border-top: 1px solid var(--line); }
-#projects { grid-template-columns: .55fr 1.45fr; }
+.projects-intro { padding: 70px 0 45px; }
+.projects-intro h1 { max-width: 850px; }
+.projects-intro .lede { max-width: 720px; }
+.projects-list { padding-bottom: 100px; }
 .intro > p:last-child { max-width: 490px; color: var(--muted); line-height: 1.7; }
 .projects { display: grid; gap: 14px; }
 .project { display: grid; padding: 26px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255, 255, 255, .03); }
@@ -206,7 +214,6 @@ footer { display: flex; justify-content: space-between; padding: 24px 0 34px; bo
   header { grid-template-columns: 1fr auto; }
   .location { display: none; }
   .hero, .section, .resume-hero, .bio-hero, .album-hero, .case-hero, .case-copy, .showcase { grid-template-columns: 1fr; }
-  #projects { grid-template-columns: 1fr; }
   .hero { gap: 40px; }
   .project.featured { grid-template-columns: 190px 1fr; }
   .contact { grid-template-columns: 1fr; align-items: start; }
@@ -222,8 +229,9 @@ footer { display: flex; justify-content: space-between; padding: 24px 0 34px; bo
   nav { position: absolute; top: 68px; right: 0; display: none; width: 210px; padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: #15191a; }
   nav.open { display: grid; }
   header button { display: block; }
-  .studio-landing { min-height: calc(100svh - 78px); }
-  .landing-art img { max-height: calc(100svh - 78px); }
+  .landing-art img { max-height: 100svh; }
+  .projects-intro { padding: 48px 0 28px; }
+  .projects-list { padding-bottom: 64px; }
   .explore-button { right: 50%; bottom: 18px; min-height: 46px; padding: 0 18px; transform: translateX(50%); }
   .explore-button:hover { transform: translateX(50%) translateY(-3px); }
   .hero { min-height: auto; padding: 56px 0 72px; }
@@ -257,6 +265,8 @@ footer { display: flex; justify-content: space-between; padding: 24px 0 34px; bo
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .studio-landing { transition: none; }
+  .site-reveal { animation: none; }
   html { scroll-behavior: auto; }
   .pulse { animation: none; }
   .location-status { animation: none; }
