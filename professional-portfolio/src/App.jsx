@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   Cable,
   Camera,
+  ChevronDown,
   Code2,
   Gamepad2,
   GraduationCap,
@@ -238,14 +239,21 @@ function Home() {
     <div className="shell">
       <Header />
       <main id="top">
-        <section className="hero">
+        <section className="studio-landing" aria-label="Roaming Sketch Studio">
+          <div className="landing-art">
+            <img src="/roaming-sketch-studio-hero.png" alt="Roaming Sketch Studio artwork featuring a laptop, RV, mountains, and compass" />
+            <span className="sun-glow" aria-hidden="true" />
+          </div>
+          <a className="explore-button" href="#explore">Explore more <ChevronDown /></a>
+        </section>
+
+        <section className="hero home-overview" id="explore">
           <div>
             <p className="eyebrow">ROAMING SKETCH STUDIO · WEB · GAME · TECH</p>
             <h1>I build useful things with <span>character.</span></h1>
             <p className="lede">I’m Jonathan Shelley—a designer and developer who combines creative ideas with hands-on technical experience. I build responsive websites, game systems, and reliable real-world installations.</p>
-            <p className="remote-statement">After a year of traveling, I’ve built a reliable remote setup and a working rhythm that lets me contribute from anywhere. I’m looking for a genuinely remote role with a team that values consistency, ownership, and thoughtful work.</p>
             <div className="actions"><a className="button primary" href="#projects">See my work <ArrowUpRight size={18} /></a><a className="button" href="mailto:jonio298@gmail.com">Let’s talk</a></div>
-            <div className="facts"><span><MapPin />Santa Fe, New Mexico</span><span><RadioTower />Seeking full-time remote work</span></div>
+            <div className="facts"><span><MapPin />Santa Fe, New Mexico</span><span><RadioTower />Reliable Starlink workspace</span></div>
           </div>
           <LocationRadar />
         </section>
@@ -258,7 +266,7 @@ function Home() {
         </section>
 
         <section className="contact" id="contact">
-          <div><p className="eyebrow">CONTACT</p><h2>Let’s build something useful together.</h2><p>I’m looking for a full-time remote role where I can contribute to web projects, product design, game systems, or technical implementation—and grow with a good team.</p></div>
+          <div><p className="eyebrow">CONTACT</p><h2>Let’s build something useful together.</h2><p>Have a web project, game system, or technical challenge that could use a creative and dependable perspective? I’d love to hear about it.</p></div>
           <div className="actions"><a className="button primary" href="mailto:jonio298@gmail.com"><Mail />Email me</a><a className="button" href="https://github.com/jonio298" target="_blank" rel="noreferrer"><Code2 />GitHub</a></div>
         </section>
       </main>
