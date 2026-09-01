@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<title>Chalkboard Dungeon</title>
+		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
+<link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
+<style>#web-controls{position:fixed;top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));display:flex;gap:.5rem;z-index:9999;pointer-events:auto}.web-control{appearance:none;border:1px solid rgba(120,228,255,.72);border-radius:.45rem;background:rgba(0,12,18,.76);box-shadow:0 0 18px rgba(0,200,255,.16);color:#d5f8ff;cursor:pointer;font:700 .78rem/1 'Noto Sans','Droid Sans',Arial,sans-serif;letter-spacing:0;padding:.62rem .76rem;text-decoration:none;text-transform:uppercase}.web-control:hover,.web-control:focus-visible{background:rgba(0,38,52,.88);border-color:rgba(180,246,255,.96);color:#fff;outline:none}@media(max-width:520px){#web-controls{left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right));justify-content:flex-end}.web-control{font-size:.68rem;padding:.54rem .58rem}}</style><script>document.addEventListener('DOMContentLoaded',function(){if(document.getElementById('web-controls'))return;var controls=document.createElement('div');controls.id='web-controls';controls.setAttribute('aria-label','Web player controls');controls.innerHTML='<a class="web-control" href="https://venmo.com/?txn=pay&amp;recipients=jonio298%40gmail.com" target="_blank" rel="noopener noreferrer">Donate</a><button class="web-control" id="fullscreen-button" type="button" aria-pressed="false">Fullscreen</button>';document.body.appendChild(controls);var button=document.getElementById('fullscreen-button');var canvas=document.getElementById('canvas');function current(){return document.fullscreenElement||document.webkitFullscreenElement}function request(target){if(target.requestFullscreen)return target.requestFullscreen();if(target.webkitRequestFullscreen)return target.webkitRequestFullscreen();return Promise.reject(new Error('Fullscreen is not supported by this browser.'))}function exit(){if(document.exitFullscreen)return document.exitFullscreen();if(document.webkitExitFullscreen){document.webkitExitFullscreen();return Promise.resolve()}return Promise.reject(new Error('Fullscreen is not supported by this browser.'))}function update(){var active=!!current();button.textContent=active?'Exit Fullscreen':'Fullscreen';button.setAttribute('aria-pressed',active?'true':'false')}button.addEventListener('click',function(){(current()?exit():request(canvas||document.documentElement)).catch(function(err){console.warn(err)})});document.addEventListener('fullscreenchange',update);document.addEventListener('webkitfullscreenchange',update);update()});</script>
+		<style>
+html, body, #canvas {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	color: white;
+	background-color: black;
+	overflow: hidden;
+	touch-action: none;
+	font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#canvas {
+	display: block;
+}
+
+#canvas:focus {
+	outline: none;
+}
+
+#status, #status-splash, #status-progress {
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+#status, #status-splash {
+	top: 0;
+	bottom: 0;
+}
+
+#status {
+	background-color: #242424;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	visibility: hidden;
+}
+
+#status-splash {
+	max-height: 100%;
+	max-width: 100%;
+	margin: auto;
+}
+
+#status-progress, #status-notice {
+	display: none;
+}
+
+#status-progress {
+	bottom: 10%;
+	width: 50%;
+	margin: 0 auto;
+}
+
+#status-notice {
+	background-color: #5b3943;
+	border-radius: 0.5rem;
+	border: 1px solid #9b3943;
+	color: #e0e0e0;
+	line-height: 1.3;
+	margin: 0 2rem;
+	overflow: hidden;
+	padding: 1rem;
+	text-align: center;
+	z-index: 1;
+}
+
+#web-controls {
+	position: fixed;
+	top: max(12px, env(safe-area-inset-top));
+	right: max(12px, env(safe-area-inset-right));
+	display: flex;
+	gap: 0.5rem;
+	z-index: 2;
+	pointer-events: auto;
+}
+
+.web-control {
+	appearance: none;
+	border: 1px solid rgba(120, 228, 255, 0.72);
+	border-radius: 0.45rem;
+	background: rgba(0, 12, 18, 0.76);
+	box-shadow: 0 0 18px rgba(0, 200, 255, 0.16);
+	color: #d5f8ff;
+	cursor: pointer;
+	font: 700 0.78rem/1 'Noto Sans', 'Droid Sans', Arial, sans-serif;
+	letter-spacing: 0;
+	padding: 0.62rem 0.76rem;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.web-control:hover,
+.web-control:focus-visible {
+	background: rgba(0, 38, 52, 0.88);
+	border-color: rgba(180, 246, 255, 0.96);
+	color: #ffffff;
+	outline: none;
+}
+
+@media (max-width: 520px) {
+	#web-controls {
+		left: max(10px, env(safe-area-inset-left));
+		right: max(10px, env(safe-area-inset-right));
+		justify-content: flex-end;
+	}
+
+	.web-control {
+		font-size: 0.68rem;
+		padding: 0.54rem 0.58rem;
+	}
+}
+		</style>
+		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
+		<link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
+	</head>
+	<body>
+		<div id="web-controls" aria-label="Web player controls">
+			<a class="web-control" href="https://venmo.com/?txn=pay&amp;recipients=jonio298%40gmail.com" target="_blank" rel="noopener noreferrer">Donate</a>
+			<button class="web-control" id="fullscreen-button" type="button" aria-pressed="false">Fullscreen</button>
+		</div>
+
+		<canvas id="canvas">
+			Your browser does not support the canvas tag.
+		</canvas>
+
+		<noscript>
+			Your browser does not support JavaScript.
+		</noscript>
+
+		<div id="status">
+			<img id="status-splash" src="index.png" alt="">
+			<progress id="status-progress"></progress>
+			<div id="status-notice"></div>
+		</div>
+
+		<script src="index.js"></script>
+		<script>
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":69240992,"index.wasm":43016933},"focusCanvas":true,"gdextensionLibs":[]};
+const GODOT_THREADS_ENABLED = false;
+const engine = new Engine(GODOT_CONFIG);
+
+(function () {
+	const fullscreenButton = document.getElementById('fullscreen-button');
+	const canvas = document.getElementById('canvas');
+
+	function fullscreenElement() {
+		return document.fullscreenElement || document.webkitFullscreenElement;
+	}
+
+	function requestFullscreen(target) {
+		if (target.requestFullscreen) {
+			return target.requestFullscreen();
+		}
+		if (target.webkitRequestFullscreen) {
+			return target.webkitRequestFullscreen();
+		}
+		return Promise.reject(new Error('Fullscreen is not supported by this browser.'));
+	}
+
+	function exitFullscreen() {
+		if (document.exitFullscreen) {
+			return document.exitFullscreen();
+		}
+		if (document.webkitExitFullscreen) {
+			document.webkitExitFullscreen();
+			return Promise.resolve();
+		}
+		return Promise.reject(new Error('Fullscreen is not supported by this browser.'));
+	}
+
+	function updateFullscreenButton() {
+		const active = Boolean(fullscreenElement());
+		fullscreenButton.textContent = active ? 'Exit Fullscreen' : 'Fullscreen';
+		fullscreenButton.setAttribute('aria-pressed', active ? 'true' : 'false');
+	}
+
+	fullscreenButton.addEventListener('click', () => {
+		const action = fullscreenElement() ? exitFullscreen() : requestFullscreen(canvas || document.documentElement);
+		action.catch((err) => {
+			console.warn(err);
+		});
+	});
+
+	document.addEventListener('fullscreenchange', updateFullscreenButton);
+	document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+	updateFullscreenButton();
+}());
+
+(function () {
+	const statusOverlay = document.getElementById('status');
+	const statusProgress = document.getElementById('status-progress');
+	const statusNotice = document.getElementById('status-notice');
+
+	let initializing = true;
+	let statusMode = '';
+
+	function setStatusMode(mode) {
+		if (statusMode === mode || !initializing) {
+			return;
+		}
+		if (mode === 'hidden') {
+			statusOverlay.remove();
+			initializing = false;
+			return;
+		}
+		statusOverlay.style.visibility = 'visible';
+		statusProgress.style.display = mode === 'progress' ? 'block' : 'none';
+		statusNotice.style.display = mode === 'notice' ? 'block' : 'none';
+		statusMode = mode;
+	}
+
+	function setStatusNotice(text) {
+		while (statusNotice.lastChild) {
+			statusNotice.removeChild(statusNotice.lastChild);
+		}
+		const lines = text.split('\n');
+		lines.forEach((line) => {
+			statusNotice.appendChild(document.createTextNode(line));
+			statusNotice.appendChild(document.createElement('br'));
+		});
+	}
+
+	function displayFailureNotice(err) {
+		console.error(err);
+		if (err instanceof Error) {
+			setStatusNotice(err.message);
+		} else if (typeof err === 'string') {
+			setStatusNotice(err);
+		} else {
+			setStatusNotice('An unknown error occured');
+		}
+		setStatusMode('notice');
+		initializing = false;
+	}
+
+	const missing = Engine.getMissingFeatures({
+		threads: GODOT_THREADS_ENABLED,
+	});
+
+	if (missing.length !== 0) {
+		if (GODOT_CONFIG['serviceWorker'] && GODOT_CONFIG['ensureCrossOriginIsolationHeaders'] && 'serviceWorker' in navigator) {
+			Promise.race([
+				navigator.serviceWorker.getRegistration().then((registration) => {
+					if (registration != null) {
+						return Promise.reject(new Error('Service worker already exists.'));
+					}
+					return registration;
+				}).then(() => engine.installServiceWorker()),
+				new Promise((resolve) => {
+					setTimeout(() => resolve(), 2000);
+				}),
+			]).catch((err) => {
+				console.error('Error while registering service worker:', err);
+			}).then(() => {
+				window.location.reload();
+			});
+		} else {
+			const missingMsg = 'Error\nThe following features required to run Godot projects on the Web are missing:\n';
+			displayFailureNotice(missingMsg + missing.join('\n'));
+		}
+	} else {
+		setStatusMode('progress');
+		engine.startGame({
+			'onProgress': function (current, total) {
+				if (current > 0 && total > 0) {
+					statusProgress.value = current;
+					statusProgress.max = total;
+				} else {
+					statusProgress.removeAttribute('value');
+					statusProgress.removeAttribute('max');
+				}
+			},
+		}).then(() => {
+			setStatusMode('hidden');
+		}, displayFailureNotice);
+	}
+}());
+		</script>
+	</body>
+</html>
+

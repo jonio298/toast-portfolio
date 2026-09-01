@@ -1,8 +1,17 @@
 {
-  "rewrites": [
+  "buildCommand": "npm --prefix professional-portfolio install && npm --prefix professional-portfolio run build",
+  "outputDirectory": "professional-portfolio/dist",
+  "headers": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/chalkboard-dungeon/(.*)",
+      "headers": [
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
+        { "key": "Cross-Origin-Embedder-Policy", "value": "require-corp" }
+      ]
     }
+  ],
+  "rewrites": [
+    { "source": "/chalkboard-dungeon", "destination": "/chalkboard-dungeon/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
