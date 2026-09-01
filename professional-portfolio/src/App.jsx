@@ -101,7 +101,7 @@ const skillGroups = [
   {
     Icon: Code2,
     title: 'Web Development',
-    intro: 'Responsive experiences ready for real users.',
+    intro: 'I tailor every website to the client’s goals and keep refining the experience until it looks, feels, and works exactly the way they need.',
     items: ['JavaScript', 'React', 'HTML5', 'CSS3', 'Python', 'Node.js', 'Flask', 'REST APIs', 'MySQL', 'Git & GitHub'],
   },
   {
