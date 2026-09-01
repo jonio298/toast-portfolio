@@ -142,7 +142,6 @@ function Header() {
         <a href="/#projects" onClick={() => setOpen(false)}>Projects</a>
         <a href="/resume" onClick={() => setOpen(false)}>Experience & Skills</a>
         <a href="/bio" onClick={() => setOpen(false)}>Bio</a>
-        <a href="/#contact" onClick={() => setOpen(false)}>Contact</a>
       </nav>
       <button onClick={() => setOpen(!open)} aria-label="Toggle navigation" aria-expanded={open}>{open ? <X /> : <Menu />}</button>
     </header>
