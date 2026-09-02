@@ -353,7 +353,15 @@ function ResumePage() {
         </section>
 
         <section className="credentials">
-          <article><GraduationCap /><div><p className="eyebrow">EDUCATION</p><h3>Full Stack Software Engineering</h3><p>4Geeks Academy · 2023</p><h3>Computer Information Systems</h3><p>HACC, Lancaster Campus · 2010–2014</p></div></article>
+          <article><GraduationCap /><div>
+            <p className="eyebrow">EDUCATION</p>
+            <h3>Full Stack Software Engineering</h3>
+            <p>4Geeks Academy · February–September 2023</p>
+            <p>Full-stack development training with React, Flux, Flask, and PostgreSQL.</p>
+            <h3>Computer Information Systems Coursework</h3>
+            <p>HACC, Lancaster Campus · 2010–2014</p>
+            <p>Undergraduate coursework in Computer Information Systems.</p>
+          </div></article>
           <article><ShieldCheck /><div><p className="eyebrow">RECOGNITION</p><h3>2nd Place, State Computer Fair</h3><p>2008</p><h3>Employee of the Month</h3><p>Staples Easy Tech · 2010</p></div></article>
         </section>
 
